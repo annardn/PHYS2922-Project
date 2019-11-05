@@ -56,46 +56,10 @@ pro arc_only
     avg_spectrum[ifreq] = intensity[0]
     
   endfor
-  
-
-
-;  chan_files = files_from_obsid_freq(5,6)
-;  mwa_prep, chan_files.file, index, data
-;  
-;  ;signal to noise ratio for the entire image for first 5 minutes
-;  bg = baseline_image(data, /median)
-;  snr = snr_img(bg, sig)
-;
-;  want = where(snr gt 90)
-;
-;  ;create a blank image and set all pixels in the mask to 1
-;  mask_img = intarr(index[0].naxis1, index[1].naxis2)
-;  mask_img[want] = 1
-;  
-;  masked_data = data
-;  
-;  for i = 0, n_elements(data[*,0,0])-1 do begin
-;    for j =0, n_elements(data[0,*,0])-1 do begin
-;      for k = 0, n_elements(data[0,0,*])-1 do begin
-;        if mask_img[i,j] ne 1 then begin
-;          masked_data[i,j,k] = 0
-;        endif
-;      endfor
-;    endfor
-;  endfor
-;  
-;  freqs = get_freqs_obsid(5)
-;  
-;  
-;  spectrum = fltarr(n_elements(freqs))
-;  for i = 0, n_elements(freqs)-1 do begin
-;    chan_files = files_from_obsid_freq(5,i)
-;    mwa_prep, chan_files.file, index, data
-;    intensity = total(total(data,1),1)
-;    spectrum[i] = intensity[0]*flux_factor(i)
-;  endfor
 
    freqs = get_freqs_obsid(5)
+   
+   plot, alog10(freqs), alog10(avg_spectrum), xtitle = "Frequency (MHz)", ytitle = "Intensity (SFU)"
   
   stop  
 end
